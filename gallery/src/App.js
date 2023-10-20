@@ -23,7 +23,7 @@ const App = () => {
 		const fetchData = async () => {
 			const responseJson = await getImages();
 			console.log(imageList);
-			setImageList(responseJson.resources);
+			setImageList(responseJson.resources.filter((image)=>(image.folder=="fitsixes")));
 			setNextCursor(responseJson.next_cursor);
 		};
 
@@ -36,7 +36,7 @@ const App = () => {
 		const responseJson = await getImages(nextCursor);
 		setImageList((currentImageList) => [
 			...currentImageList,
-			...responseJson.resources,
+			...responseJson.resources.filter((image)=>(image.folder=="fitsixes")),
 		]);
 		setNextCursor(responseJson.next_cursor);
 	};
